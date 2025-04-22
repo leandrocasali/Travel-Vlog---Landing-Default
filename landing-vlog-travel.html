@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ruleta de Premios - Travel Vlog</title>
+  <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background-color: black;
+      color: white;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 400px;
+      padding: 20px;
+      flex-grow: 1;
+      background: url('https://s3-sa-east-1.amazonaws.com/producto.locoporlacocina/wp-content/uploads/2025/04/img-bg.jpg') no-repeat center center;
+      background-size: cover;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+      width: 100%;
+    }
+    .header img {
+      width: 150px;
+      margin-bottom: 10px;
+    }
+    .header .tagline {
+      background-color: white;
+      color: #00c4cc;
+      font-size: 14px;
+      font-weight: bold;
+      padding: 5px 10px;
+      border-radius: 5px;
+      display: inline-block;
+    }
+    
+.wheel-wrapper {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin-bottom: 20px;
+    margin-top: -70px;
+}
+    .wheel-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+
+      z-index: 1;
+      opacity: 0.9;
+    }
+    .wheel-container {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      border: 10px solid #ffd700;
+      border-radius: 50%;
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+      z-index: 2;
+    }
+    .wheel {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      position: relative;
+      overflow: hidden;
+      transition: transform 4s ease-out;
+      background: conic-gradient(
+        #999 0deg 72deg,    /* WIN MERCHANDISE (light gray) */
+        #333 72deg 144deg,  /* WIN A TRIP (dark gray) */
+        #00c4cc 144deg 216deg, /* SUBSCRIPTION DISCOUNT (teal) */
+        #666 216deg 288deg, /* WIN A SUITCASE (gray) */
+        #ccc 288deg 360deg  /* WIN 1 MONTH OF FREE (lighter gray) */
+      );
+    }
+    .wheel div {
+      position: absolute;
+      width: 50%;
+      height: 50%;
+      clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+      transform-origin: bottom right;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Teko', sans-serif;
+      font-size: 14px;
+      font-weight: bold;
+      color: white;
+      text-align: center;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    }
+    .wheel div .icon {
+      font-size: 20px;
+      margin-bottom: 5px;
+      margin-top: -30px;
+    }
+    .wheel div span {
+      display: inline-block;
+      width: 70%;
+      transform: rotate(-36deg);
+      position: relative;
+      top: -10px;
+      line-height: 1;
+    }
+    .wheel div:nth-child(1) { transform: rotate(0deg); }  /* WIN MERCHANDISE */
+    .wheel div:nth-child(2) { transform: rotate(72deg); } /* WIN A TRIP */
+    .wheel div:nth-child(3) { transform: rotate(144deg); } /* SUBSCRIPTION DISCOUNT */
+    .wheel div:nth-child(4) { transform: rotate(216deg); } /* WIN A SUITCASE */
+    .wheel div:nth-child(5) { transform: rotate(288deg); } /* WIN 1 MONTH OF FREE */
+    .center-circle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100px;
+      height: 100px;
+      background-color: #ffd700;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      z-index: 10;
+    }
+    .center-circle.result {
+    background-color: rgba(0, 0, 0, 0.8);
+    width: 100%;
+    height: 100%;
+}
+    .spin-button, .continue-button {
+      padding: 10px 20px;
+      font-size: 14px;
+      border: none;
+      border-radius: 25px;
+      background-color: #ffd700;
+      color: #333;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .spin-button:hover, .continue-button:hover {
+      background-color: #e6c200;
+    }
+    .result-text {
+      font-size: 12px;
+      text-align: center;
+      margin-bottom: 10px;
+      color: white;
+      font-weight: bold;
+    }
+    .wheel-text {
+      text-align: center;
+      font-size: 30px;
+      font-weight: bold;
+      color: white;
+      text-transform: uppercase;
+      margin-top: 20px;
+    }
+.footer {
+    text-align: center;
+    font-size: 12px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    width: 100%;
+    max-width: 300px;
+    bottom: 0;
+    left: 0;
+}
+    .footer p {
+      margin: 0 0 5px 0;
+    }
+    .footer a {
+      color: white;
+      text-decoration: underline;
+      margin: 0 5px;
+    }
+    .footer a:hover {
+      color: #00c4cc;
+    }
+    @media (max-width: 320px) {
+      .container {
+        padding: 15px;
+      }
+      .header img {
+        width: 120px;
+      }
+      .header .tagline {
+        font-size: 12px;
+        padding: 4px 8px;
+      }
+      .wheel-wrapper, .wheel-container {
+        width: 250px;
+        height: 250px;
+      }
+      .center-circle {
+        width: 80px;
+        height: 80px;
+      }
+      .spin-button, .continue-button {
+        padding: 8px 16px;
+        font-size: 12px;
+      }
+      .wheel div {
+        font-size: 12px;
+      }
+      .wheel div .icon {
+        font-size: 16px;
+        margin-top: -20px;
+      }
+      .wheel div span {
+        top: -8px;
+        width: 60%;
+        line-height: 1;
+      }
+      .wheel-text {
+        font-size: 8px;
+        margin-top: 8px;
+      }
+      .footer {
+        font-size: 10px;
+        padding: 8px;
+      }
+    }
+    .img-2 img {
+      max-width:400px;
+      width:100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="https://s3-sa-east-1.amazonaws.com/producto.locoporlacocina/wp-content/uploads/2025/04/logo-travel-vlog.png" alt="Travel Vlog Logo">
+      <div style="display:none;" class="tagline">DISCOVER NEW PLACES WITH US</div>
+    </div>
+    <div class="img-2">          
+    <img src="https://s3-sa-east-1.amazonaws.com/producto.locoporlacocina/wp-content/uploads/2025/04/detras-de-ruleta.png" alt="flight assistant">
+    </div>
+    <div class="wheel-wrapper">
+      <div class="wheel-overlay"></div>
+      <div class="wheel-container">
+        <div class="wheel" id="wheel">
+          <div>
+            <span class="icon">👕</span>
+            <span>WIN MERCHANDISE</span>
+          </div>
+          <div>
+            <span class="icon">✈️</span>
+            <span>WIN A TRIP</span>
+          </div>
+          <div>
+            <span class="icon">🔥</span>
+            <span>SUBSCRIPTION DISCOUNT FOR 0.80 CEDIS</span>
+          </div>
+          <div>
+            <span class="icon">🧳</span>
+            <span>WIN A SUITCASE</span>
+          </div>
+          <div>
+            <span class="icon">🎁</span>
+            <span>WIN 1 MONTH OF FREE</span>
+          </div>
+        </div>
+        <div class="center-circle" id="centerCircle">
+          <button class="spin-button" id="spinButton">iPLAY & WIN!</button>
+        </div>
+      </div>
+      <div class="wheel-text"><marquee direction="left" behavior="scroll" scrollamount="5">¡Try your luck and win a prize!</marquee></div>
+    </div>
+  </div>
+  <div class="footer">
+    <p>VLOG TRAVEL IS AN AUTO-RENEWABLE SUBSCRIPTION. FOR MORE INFORMATION TERMS AND CONDITIONS AND PRIVACY POLICY.</p>
+    <a href="/terminos">TERMS AND CONDITIONS</a> |
+    <a href="/privacidad">PRIVACY POLICY</a>
+  </div>
+
+  <script>
+    const wheel = document.getElementById('wheel');
+    const spinButton = document.getElementById('spinButton');
+    const centerCircle = document.getElementById('centerCircle');
+    const prizes = [
+      'WIN MERCHANDISE',
+      'WIN A TRIP',
+      'SUBSCRIPTION DISCOUNT FOR 0.80 CEDIS',
+      'WIN A SUITCASE',
+      'WIN 1 MONTH OF FREE'
+    ];
+    
+    spinButton.addEventListener('click', () => {
+      spinButton.disabled = true;
+      const fixedPrizeIndex = 2;
+      const degreesPerPrize = 360 / prizes.length;
+      const extraSpins = 360 * 5;
+      const finalAngle = -(fixedPrizeIndex * degreesPerPrize + extraSpins);
+      
+      wheel.style.transform = `rotate(${finalAngle}deg)`;
+      
+      setTimeout(() => {
+        centerCircle.classList.add('result');
+        centerCircle.innerHTML = `
+          <p class="result-text"><span>🔥</span> <br>CONGRATULATIONS!<br>YOU WIN ${prizes[fixedPrizeIndex]}</p>
+          <button class="continue-button" onclick="window.location.href='https://ejemplo.com'">CONTINUE</button>
+        `;
+      }, 4000);
+    });
+  </script>
+</body>
+</html>
