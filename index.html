@@ -107,18 +107,19 @@
       text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
     }
     .wheel div .icon {
-    font-size: 40px;
+    font-size: 30px;
     margin-bottom: 5px;
     margin-top: 10px;
 }
     .wheel div span {
-      display: inline-block;
-      width: 70%;
-      transform: rotate(-36deg);
-      position: relative;
-      top: -10px;
-      line-height: 1;
-    }
+    display: inline-block;
+    width: 100%;
+    transform: rotate(-36deg);
+    position: relative;
+    top: -10px;
+    line-height: 1;
+    padding-left: 30px;
+}
     .wheel div:nth-child(1) { transform: rotate(0deg); }  /* WIN MERCHANDISE */
     .wheel div:nth-child(2) { transform: rotate(72deg); } /* WIN A TRIP */
     .wheel div:nth-child(3) { transform: rotate(144deg); } /* SUBSCRIPTION DISCOUNT */
@@ -240,7 +241,7 @@
         line-height: 1;
       }
       .wheel-text {
-        font-size: 12px;
+        font-size: 14px;
         margin-top: 8px;
       }
       .footer {
@@ -265,6 +266,8 @@
     cursor: pointer;
     transition: background-color 0.3s;
     }
+
+    .icon {display:none;}
   </style>
 </head>
 <body>
@@ -282,32 +285,31 @@
         <div class="wheel" id="wheel">
           <div>
             <span class="icon">👕</span>
-            <span>WIN MERCHANDISE</span>
+            <span>MERCHANDISE</span>
           </div>
           <div>
             <span class="icon">✈️</span>
-            <span>WIN A TRIP</span>
+            <span>WIN A <br>TRIP</span>
           </div>
           <div>
             <span class="icon">🔥</span>
-            <span>SUBSCRIPTION <br>
-            DISCOUNT FOR <br>
-          GHC 0.80</span>
+            <span>SUBSCRIPTION 
+          <br>GHC 0.80</span>
           </div>
           <div>
             <span class="icon">🧳</span>
-            <span>WIN A SUITCASE</span>
+            <span>WIN A <br>SUITCASE</span>
           </div>
           <div>
             <span class="icon">🎁</span>
-            <span>WIN 1 MONTH OF FREE</span>
+            <span>1 MONTH <br>OF FREE</span>
           </div>
         </div>
         <div class="center-circle" id="centerCircle">
-          <button class="spin-button" id="spinButton">iPLAY & WIN!</button>
+          <button class="spin-button" id="spinButton">Play and Win!</button>
         </div>
       </div>
-      <div class="wheel-text"><marquee direction="left" behavior="scroll" scrollamount="5">¡Try your luck and win a prize!</marquee></div>
+      <div class="wheel-text"><marquee direction="left" behavior="scroll" scrollamount="5">Try your luck and win a prize!</marquee></div>
     </div>
   </div>
       <p>VLOG TRAVEL IS AN AUTO-RENEWABLE SUBSCRIPTION. FOR MORE INFORMATION TERMS AND CONDITIONS AND PRIVACY POLICY.</p>
